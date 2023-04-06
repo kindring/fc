@@ -1,0 +1,26 @@
+import express, { Application, Request, Response, NextFunction } from 'express'
+import {loadServerConfig} from './until/loadConfig'
+import logger from "./lib/logger"
+import morganMiddleware from './middleware/morganMiddleware'
+
+main();
+function main():void{
+    let serverConfig = loadServerConfig('./config/Server.json')
+    if(serverConfig === null){
+        logger.error("无法加载服务器配置文件");
+        throw new Error("无法加载服务器配置文件");
+    }
+    const app:Application = express();
+    app.use(morganMiddleware);
+    app.get('/', (req:Request, res:Response, next:NextFunction) => {
+        res.send('Hello World!');
+    });
+    app.use((req,res)=>{
+        res.sendStatus(404);
+        // res.send("404");
+    })
+    app.listen(serverConfig.webPort, function(){
+        logger.info(`web服务以启动,监听端口为: 0.0.0.0:${serverConfig.webPort}`)
+        // console.log(`Example app listening on port ${serverConfig.webPort}!`);
+    });
+}
