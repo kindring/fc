@@ -3,6 +3,7 @@ import {loadServerConfig} from './until/loadConfig'
 import logger from "./lib/logger"
 import morganMiddleware from './middleware/morganMiddleware'
 
+import apiIndex from "./webRouter/apiIndex";
 main();
 function main():void{
     let serverConfig = loadServerConfig('./config/Server.json')
@@ -13,8 +14,9 @@ function main():void{
     const app:Application = express();
     app.use(morganMiddleware);
     app.get('/', (req:Request, res:Response, next:NextFunction) => {
-        res.send('Hello World!');
+        res.send('Hello this website is a FC');
     });
+    app.use('/api',apiIndex);
     app.use((req,res)=>{
         res.sendStatus(404);
         // res.send("404");
