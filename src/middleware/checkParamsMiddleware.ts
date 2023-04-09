@@ -1,9 +1,9 @@
-import Logger from "../lib/logger";
-import {IHttpParam, paramSource} from "../types/IHttpParam";
-import {IErrorCode,Err_Missing_Param} from "../types/IErrorCode";
-import * as ErrorCode  from "../types/IErrorCode";
 
-function createCheckHandle(paramRules?:IHttpParam[]){
+import {IHttpParam, paramSource} from "../types/IHttpParam";
+import {Err_Missing_Param} from "../types/IErrorCode";
+import logger from "../lib/logger";
+
+export function createCheckHandle(paramRules?:IHttpParam[]){
     return (req,res,next)=>{
         if(!paramRules){
             return next();
@@ -19,20 +19,27 @@ function createCheckHandle(paramRules?:IHttpParam[]){
             // 判断是否为必须值
             if(paramRule.required){
                 // 判断是否有值
-                if(val==="" || val===null || val===undefined || val===[] || val==={}){
+                if(val==="" || val===null || val===undefined ){
+                    logger.info("default required?")
                     res.json(Err_Missing_Param);
-                    return Logger.warn(Err_Missing_Param.logTip)
+                    return logger.warn(Err_Missing_Param.logTip)
                 }
-                // 取值
-                req.params[paramRule.key] = val;
             }
             // 是否有默认值
             if(paramRule.default){
-
+                if(val==="" || val===null || val===undefined){
+                    val = paramRule.default;
+                    // continue;
+                }
             }
-
+            // req.params[paramRule.key] = val;
+            if(paramRule.source === paramSource.query){
+                req.query[paramRule.key] = val;
+            }else if(paramRule.source === paramSource.body){
+                req.body[paramRule.key] = val;
+            }
         }
-        next(req,res);
+        next();
     }
 
 }

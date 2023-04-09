@@ -3,9 +3,9 @@ export enum paramSource {
     body = "body"
 }
 export interface IHttpParam {
-    type: any,
+    type?: any,
     key: string,
-    required: boolean,
-    default: any,
+    required?: boolean,
+    default?: any,
     source: paramSource
 }
