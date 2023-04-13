@@ -1,4 +1,5 @@
 import express, { Application, Request, Response, NextFunction } from 'express'
+import bodyParser from 'body-parser';
 import {loadServerConfig} from './until/loadConfig'
 import logger from "./lib/logger"
 import morganMiddleware from './middleware/morganMiddleware'
@@ -13,6 +14,8 @@ function main():void{
     }
     const app:Application = express();
     app.use(morganMiddleware);
+    app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+    app.use(bodyParser.json({ limit: '10mb' }));
     app.get('/', (req:Request, res:Response, next:NextFunction) => {
         res.send('Hello this website is a FC');
     });
