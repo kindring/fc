@@ -1,18 +1,18 @@
 #!/bin/sh
-if [ ! -f "./configs/Server.json" ];
+if [ ! -f "./config/Server.json" ];
 then
-  cp ./conf/Server.json ./configs/Server.json
-  echo "Server.json copied from /conf to /configs"
+  cp ./conf/Server.json ./config/Server.json
+  echo "Server.json copied from /conf to /config"
 fi
-if [ ! -f "./configs/file.json" ];
+if [ ! -f "./config/file.json" ];
 then
-  cp ./conf/file.json ./configs/file.json
-  echo "file.json copied from /conf to /configs"
+  cp ./conf/file.json ./config/file.json
+  echo "file.json copied from /conf to /config"
 fi
-if [ ! -f "./configs/Custom.json" ];
+if [ ! -f "./config/Custom.json" ];
 then
-  cp ./conf/Custom.json ./configs/Custom.json
-  echo "file.json copied from /conf to /configs"
+  cp ./conf/Custom.json ./config/Custom.json
+  echo "file.json copied from /conf to /config"
 fi
 
 npm run start
