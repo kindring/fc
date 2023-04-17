@@ -14,3 +14,5 @@ then
   cp ./conf/Custom.json ./configs/Custom.json
   echo "file.json copied from /conf to /configs"
 fi
+
+npm run start
