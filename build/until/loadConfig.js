@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loadServerConfig = void 0;
+exports.loadCustomConfig = exports.loadFileConfig = exports.loadServerConfig = void 0;
 var fs = __importStar(require("fs"));
 function loadServerConfig(configPath) {
     if (fs.existsSync(configPath)) //判断是否存在此文件
@@ -37,5 +37,28 @@ function loadServerConfig(configPath) {
     }
 }
 exports.loadServerConfig = loadServerConfig;
-exports.default = loadServerConfig;
+function loadFileConfig(configPath) {
+    if (fs.existsSync(configPath)) //判断是否存在此文件
+     {
+        //读取文件内容，并转化为Json对象
+        return JSON.parse(fs.readFileSync(configPath, "utf8"));
+    }
+    else {
+        // 无法找到该路径文件
+        return null;
+    }
+}
+exports.loadFileConfig = loadFileConfig;
+function loadCustomConfig(configPath) {
+    if (fs.existsSync(configPath)) //判断是否存在此文件
+     {
+        //读取文件内容，并转化为Json对象
+        return JSON.parse(fs.readFileSync(configPath, "utf8"));
+    }
+    else {
+        // 无法找到该路径文件
+        return null;
+    }
+}
+exports.loadCustomConfig = loadCustomConfig;
 //# sourceMappingURL=loadConfig.js.map

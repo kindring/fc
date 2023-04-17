@@ -28,3 +28,18 @@ export function loadFileConfig(configPath:string):FileConf{
     }
 }
 
+interface CustomConf{
+    mainPc: {
+        mac: string
+    }
+}
+export function loadCustomConfig(configPath:string):CustomConf{
+    if (fs.existsSync(configPath)) //判断是否存在此文件
+    {
+        //读取文件内容，并转化为Json对象
+        return JSON.parse(fs.readFileSync(configPath, "utf8"));
+    }else{
+        // 无法找到该路径文件
+        return null;
+    }
+}
