@@ -5,7 +5,7 @@ RUN npm install
 COPY build ./build
 COPY config ./conf
 COPY test.sh ./
-MKDIR ./config/
+RUN mkdir ./config/
 # 容器对外暴露的端口号
 EXPOSE 8090
 
