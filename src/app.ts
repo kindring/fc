@@ -14,6 +14,7 @@ function main():void{
     }
     const app:Application = express();
     app.use(morganMiddleware);
+    app.use('/static',express.static('./public/'));
     app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
     app.use(bodyParser.json({ limit: '10mb' }));
     app.get('/', (req:Request, res:Response, next:NextFunction) => {
