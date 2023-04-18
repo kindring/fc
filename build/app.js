@@ -18,6 +18,7 @@ function main() {
     }
     var app = (0, express_1.default)();
     app.use(morganMiddleware_1.default);
+    app.use('/static', express_1.default.static('./public/'));
     app.use(body_parser_1.default.urlencoded({ limit: '10mb', extended: true }));
     app.use(body_parser_1.default.json({ limit: '10mb' }));
     app.get('/', function (req, res, next) {
