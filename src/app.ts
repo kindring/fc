@@ -12,6 +12,7 @@ function main():void{
         logger.error("无法加载服务器配置文件");
         throw new Error("无法加载服务器配置文件");
     }
+
     const app:Application = express();
     app.use(morganMiddleware);
     app.use('/static',express.static('./public/'));
@@ -23,7 +24,6 @@ function main():void{
     app.use('/api',apiIndex);
     app.use((req,res)=>{
         res.sendStatus(404);
-        // res.send("404");
     })
     app.listen(serverConfig.webPort, function(){
         logger.info(`web服务以启动,监听端口为: 0.0.0.0:${serverConfig.webPort}`)

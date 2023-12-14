@@ -1,5 +1,5 @@
 import winston from 'winston'
-
+import dailyRotateFile from 'winston-daily-rotate-file'
 const levels = {
     error: 0,
     warn: 1,
@@ -14,6 +14,7 @@ const level = () => {
     return isDevelopment ? 'debug' : 'warn'
 }
 
+
 const colors = {
     error: 'red',
     warn: 'yellow',
@@ -24,6 +25,17 @@ const colors = {
 
 winston.addColors(colors)
 
+
+
+// 计算日志文件时间 YYYY-MM-DD
+function computeTimestamp() {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    return `${year}-${month}-${day}`;
+}
+
 const format = winston.format.combine(
     winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
     winston.format.colorize({ all: true }),
@@ -32,13 +44,24 @@ const format = winston.format.combine(
     ),
 )
 
+const dailyRotateFileOption = {
+    format: winston.format.uncolorize(),
+    datePattern: 'YYYY-MM-DD',
+    maxSize: '20m',
+    maxFiles: '30d',
+}
 const transports = [
     new winston.transports.Console(),
-    new winston.transports.File({
-        filename: 'logs/error.log',
-        level: 'error',
+    new dailyRotateFile({
+        ...dailyRotateFileOption,
+        filename: `logs/%DATE%-error.log`,
+        level: 'error'
     }),
-    new winston.transports.File({ filename: 'logs/all.log' }),
+    new dailyRotateFile({
+        ...dailyRotateFileOption,
+        filename: `logs/%DATE%-all.log`,
+    })
+
 ]
 
 const Logger = winston.createLogger({
