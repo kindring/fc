@@ -31,7 +31,8 @@ export function loadFileConfig(configPath:string):FileConf{
 interface CustomConf{
     mainPc: {
         mac: string
-    }
+    },
+    imgDir: string
 }
 export function loadCustomConfig(configPath:string):CustomConf{
     if (fs.existsSync(configPath)) //判断是否存在此文件

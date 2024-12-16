@@ -27,7 +27,6 @@ function main() {
     app.use('/api', apiIndex_1.default);
     app.use(function (req, res) {
         res.sendStatus(404);
-        // res.send("404");
     });
     app.listen(serverConfig.webPort, function () {
         logger_1.default.info("web\u670D\u52A1\u4EE5\u542F\u52A8,\u76D1\u542C\u7AEF\u53E3\u4E3A: 0.0.0.0:".concat(serverConfig.webPort));
