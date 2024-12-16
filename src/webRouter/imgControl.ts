@@ -25,7 +25,7 @@ router.get('/moveFile',(req, res)=> {
         const mvMode = mvModeValue === 'move' ? MvMode.move : MvMode.copy;
 
         if (!checkPath || !destPath || !extName)
-            return res.status(400).json({ code: -1, msg: '参数错误: src: images, dest: target, extName: xmp' });
+            return res.status(400).json({ code: -1, msg: '参数错误: src: images, dest: target, extName: xmp, move: move|copy' });
         const result = mvImgFile({
             checkPath: checkPath,
             targetPath: destPath,

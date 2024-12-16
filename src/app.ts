@@ -7,7 +7,7 @@ import morganMiddleware from './middleware/morganMiddleware'
 import apiIndex from "./webRouter/apiIndex";
 main();
 function main():void{
-    let serverConfig = loadServerConfig('./config/Server.json')
+    let serverConfig = loadServerConfig('config/Server.json')
     if(serverConfig === null){
         logger.error("无法加载服务器配置文件");
         throw new Error("无法加载服务器配置文件");

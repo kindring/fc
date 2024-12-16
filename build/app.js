@@ -11,7 +11,7 @@ var morganMiddleware_1 = __importDefault(require("./middleware/morganMiddleware"
 var apiIndex_1 = __importDefault(require("./webRouter/apiIndex"));
 main();
 function main() {
-    var serverConfig = (0, loadConfig_1.loadServerConfig)('./config/Server.json');
+    var serverConfig = (0, loadConfig_1.loadServerConfig)('config/Server.json');
     if (serverConfig === null) {
         logger_1.default.error("无法加载服务器配置文件");
         throw new Error("无法加载服务器配置文件");

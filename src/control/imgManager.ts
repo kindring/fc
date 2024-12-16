@@ -24,7 +24,7 @@ interface FileCount {
 
 
 
-const customConfig = loadCustomConfig("./config/Custom.json");
+const customConfig = loadCustomConfig("config/Custom.json");
 
 export function showDirs ():string[]{
     if (!customConfig){

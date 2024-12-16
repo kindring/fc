@@ -6,7 +6,7 @@ import {openPc} from "../lib/wol";
 
 
 const router = Router();
-const customConfig = loadCustomConfig("./config/Custom.json");
+const customConfig = loadCustomConfig("config/Custom.json");
 router.get('/openMain',(req, res)=> {
     if (!customConfig) {
         res.json({
